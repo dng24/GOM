@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Juego de MAMS</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="scripts-es.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" type="image/icon" sizes="16x16">
+  </head>
+
+  <body onload="startGame()">
+    <!--Top Bar-->
+    <div id="topBar">
+      <span onmouseover="hovIcon();" onmouseout="unHovIcon();" onclick="displays(['quit'], []);"><img id="homeIcon" src="homeIcon.png"></span>
+    </div>
+
+    <!--Modals -->
+    <div id="quit" class="modal">
+      <div class="modalContent">
+        <h3>¿Está seguro de que desea salir?</h3>
+        <p>Perderás todo el progreso.</p>
+        <a href="index.html"><button id="yesBtn">Sí</button></a>
+        <button id="noBtn" onclick="displays([], ['quit']);">No</button>
+      </div>
+    </div>
+
+    <div id="welcome" class="modal">
+      <div class="modalContent">
+        <h3>¡Bienvenido al Juego de MAMS!</h3>
+        <img src="logo.png">
+        <br>
+        <button id="beginBtn">¡Empecemos!</button>
+      </div>
+    </div>
+
+    <div id="numPlayers" class="modal">
+      <div class="modalContent">
+        <h3>Elija el número de jugadores</h3>
+        <br>
+        <button id="btn2">2</button>
+        <button id="btn3">3</button>
+        <button id="btn4">4</button>
+        <button id="btn5">5</button>
+        <button id='btn6'>6</button>
+      </div>
+    </div>
+
+    <div id="playerColor" class="modal">
+      <div class="modalContent">
+        <h3 id="colorTitle">Jugador 1: Elige un color</h3>
+        <br>
+        <button id="Rojo">Rojo</button>
+        <button id="Naranja">Naranja</button>
+        <button id="Amarillo">Amarillo</button>
+        <button id="Verde">Verde</button>
+        <button id="Azul">Azul</button>
+        <button id="Morado">Morado</button>
+        <button id="Negro">Negro</button>
+        <button id="Blanco">Blanco</button>
+      </div>
+    </div>
+
+    <div id="dice" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['dice']);">&times;</span>
+        <h3 id="rollDiceTitle"></h3>
+        <img id="diceImg" src="dice3.gif">
+        <br>
+        <button id="rollBtn">Tira Dados</button>
+        <button id="okDiceBtn" class="okBtn">Bien</button>
+      </div>
+    </div>
+
+    <div id="orangeCell" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['orangeCell']);">&times;</span>
+        <h3 id="fortune"></h3>
+        <p id="fortunePts"></p>
+        <br>
+        <button id="okFortuneBtn">Bien</button>
+      </div>
+    </div>
+
+    <div id="examCell" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['examCell']);">&times;</span>
+        <h3 id="exam1Title"></h3>
+        <p>Tira los dados.</p>
+        <p>1 - Lo hiciste mejor de lo que crees que hiciste, +7 pf</p>
+        <p>2 o 3 - Obtén puntuación buena, +3 pf</p>
+        <p>4 - Obtén puntuación mala, -7 pf</p>
+        <p>5 o 6 - Procrastinas, las instrucciones está en la pantalla siguiente</p>
+        <img id="examDiceImg" src="dice2.gif">
+        <br>
+        <button id="examRollBtn">Tira Dados</button>
+        <p id="examResult"></p>
+        <button id="examOk" class="okBtn">Bien</button>
+      </div>
+    </div>
+
+    <div id="exam2Cell" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['exam2Cell']);">&times;</span>
+        <h3 id="exam2Title"></h3>
+        <p>Elige entre quedarte despierta toda la noche y estudiar O acostarse y esperar lo mejor.</p>
+        <p>La opción para quedarse despierto toda la noche. Tira un:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-4 - Puntuación buena, +4 pf</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-6 - Puntuación mala, -5 pf</p>
+        <p>La opción de esperanza para el mejor. Tira un:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-3 - Puntuación buena, +10 pf</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-6 - Puntuación mala, -10 pf</p>
+        <button id="stayUp">No duermas</button>
+        <br>
+        <button id="hopeForBest">Espera lo mejor</button>
+      </div>
+    </div>
+
+    <div id="exam3Cell" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['exam3Cell']);">&times;</span>
+        <h3 id="exam3Title"></h3>
+        <p id="procrasType"></p>
+        <p id="examGood"></p>
+        <p id="examBad"></p>
+        <img id="exam3DiceImg" src="dice5.gif">
+        <br>
+        <button id="exam3RollBtn">Tira Dados</button>
+        <p id="exam3Result"></p>
+        <button id="exam3Ok" class="okBtn">Bien</button>
+      </div>
+    </div>
+
+    <div id="nonOp" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['nonOp']);">&times;</span>
+        <h3 id="nonOpTitle"></h3>
+        <p>Tira dados</p>
+        <p id="nonOp1"></p>
+        <p id="nonOp2"></p>
+        <p id="nonOp3"></p>
+        <p id="nonOp4"></p>
+        <p id="nonOp5"></p>
+        <p id="nonOp6"></p>
+        <img id="nonOpImg" src="dice2.gif">
+        <br>
+        <button id="nonOpRollBtn">Tira Dados</button>
+        <p id="nonOpResult"></p>
+        <button id="nonOpOkBtn" class="okBtn">Bien</button>
+      </div>
+    </div>
+
+    <div id="op" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['op']);">&times;</span>
+        <h3 id="opTitle"></h3>
+        <p>No hagas, +0 pf</p>
+        <p>O Tira dados</p>
+        <p id="op1"></p>
+        <p id="op2"></p>
+        <p id="op3"></p>
+        <p id="op4"></p>
+        <p id="op5"></p>
+        <p id="op6"></p>
+        <br>
+        <p id="opResult"></p>
+        <button id="opNoRollBtn">No Hagas</button>
+        <br>
+        <button id="opRollBtn">Tira Dados</button>
+        <button id="opOkBtn" class="okBtn">Bien</button>
+      </div>
+    </div>
+
+    <div id="opA" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['opA']);">&times;</span>
+        <h3 id="opATitle"></h3>
+        <p id="opA1"></p>
+        <p id="opA2"></p>
+        <p id="opA3"></p>
+        <p id="opA4"></p>
+        <p id="opA5"></p>
+        <p id="opA6"></p>
+        <img id="opAImg" src="dice6.gif">
+        <br>
+        <button id="opARollBtn">Tira Dados</button>
+        <p id="opAResult"></p>
+        <button id="opAOkBtn" class="okBtn">Bien</button>
+      </div>
+    </div>
+
+    <div id="winners" class="modal">
+      <div class="modalContent">
+        <span class="closeBtn" onclick="displays(['resume'], ['winners']);">&times;</span>
+        <br>
+        <h3 id="w1"></h3>
+        <h3 id="w2"></h3>
+        <h3 id="w3"></h3>
+        <h3 id="w4"></h3>
+        <h3 id="w5"></h3>
+        <h3 id="w6"></h3>
+        <br>
+        <button id="playAgain">Juegue Otra Vez</button>
+        <a href="index.html"><button id="yesBtn">Salga</button></a>
+      </div>
+    </div>
+
+  </body>
+</html>
