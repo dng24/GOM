@@ -703,7 +703,7 @@ function getCellInfo(cell, plyr) {
         this.removeEventListener('click', arguments.callee);
       });
 
-    } else if(gameArea.cells[cell].text == "Procrastinar") { //Procrastinate
+    } else if(gameArea.cells[cell].text == "Procrastinación") { //Procrastinate
       decision("Procrastina",
               ["1 - Completa la tarea con tiempo de sobra, +0 pf",
               "2 - Completa la tarea con tiempo de sobra, +0 pf",
